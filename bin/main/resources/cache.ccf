@@ -1,0 +1,29 @@
+# DEFAULT CACHE REGION
+jcs.default=
+jcs.default.cacheattributes=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.default.cacheattributes.MaxObjects=1000
+jcs.default.cacheattributes.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.default.cacheattributes.cacheattributes.UseMemoryShrinker=true
+jcs.default.cacheattributes.cacheattributes.MaxMemoryIdleTimeSeconds=1
+jcs.default.cacheattributes.cacheattributes.ShrinkerIntervalSeconds=60
+jcs.default.cacheattributes.cacheattributes.MaxSpoolPerRun=500
+
+
+# PRE-DEFINED CACHE REGIONS
+# simpleObjectCache
+jcs.region.simpleObjectCache=
+jcs.region.simpleObjectCache=org.apache.jcs.engine.CompositeCacheAttributes
+jcs.region.simpleObjectCache.MaxObjects=1000
+jcs.region.simpleObjectCache.MemoryCacheName=org.apache.jcs.engine.memory.lru.LRUMemoryCache
+jcs.region.simpleObjectCache.cacheattributes.UseMemoryShrinker=false
+jcs.region.simpleObjectCache.cacheattributes.MaxMemoryIdleTimeSeconds=3600
+jcs.region.simpleObjectCache.cacheattributes.ShrinkerIntervalSeconds=60
+jcs.region.simpleObjectCache.cacheattributes.MaxSpoolPerRun=500
+jcs.region.simpleObjectCache.cacheattributes.UseDisk=false
+jcs.region.simpleObjectCache.cacheattributes.UseLateral=false
+jcs.region.simpleObjectCache.cacheattributes.UseRemote=false
+
+jcs.region.simpleObjectCache.elementattributes=org.apache.jcs.engine.ElementAttributes
+jcs.region.simpleObjectCache.elementattributes.MaxLifeSeconds=3600
+jcs.region.simpleObjectCache.elementattributes.IsSpool=false
+jcs.region.simpleObjectCache.elementattributes.IsEternal=false
