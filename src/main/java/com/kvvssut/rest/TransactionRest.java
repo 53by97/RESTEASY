@@ -15,6 +15,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.kvvssut.dto.RestRequestDTO;
 import com.kvvssut.interceptors.AmountValidatorInterceptor;
 import com.kvvssut.interceptors.PrefixInterceptor;
@@ -24,6 +27,8 @@ import com.kvvssut.service.RestService;
 @Path("rest")
 @Interceptors({ AmountValidatorInterceptor.class, PrefixInterceptor.class })
 public class TransactionRest {
+	
+	private static Logger LOGGER = LoggerFactory.getLogger(TransactionRest.class);
 
 	@Inject
 	private RestService restService;
@@ -47,7 +52,6 @@ public class TransactionRest {
 	@Path("/method/{param}/balance")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBalanceByUsername(@PathParam("param") String userName) {
-		String output = String.format("Balance for user %s is: ", userName);
 		BigDecimal balance = new BigDecimal(0);
 		try {
 			balance = restService.getBalance(userName);
@@ -56,14 +60,15 @@ public class TransactionRest {
 			return Response.status(Status.INTERNAL_SERVER_ERROR)
 			          .entity("Extremely Sorry!! DB Issues.").build();
 		}
-		return Response.status(Status.OK).entity(output + balance).build();
+		LOGGER.info("Balance for user : {} is : {}.", userName, balance);
+		return Response.status(Status.OK).entity(balance).build();
 	}
 
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBalanceByUsername() {
-		System.out.println("hitting");
+		LOGGER.info("hitting");
 		return Response.status(Status.OK).entity("fine").build();
 	}
 }

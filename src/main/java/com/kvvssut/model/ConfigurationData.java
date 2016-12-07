@@ -38,8 +38,7 @@ public class ConfigurationData implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ConfigurationData [configName=" + configName + ", configValue=" + configValue
-		          + "]";
+		return "ConfigurationData [configName=" + configName + ", configValue=" + configValue + "]";
 	}
 
 }

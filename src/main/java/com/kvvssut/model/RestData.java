@@ -66,8 +66,8 @@ public class RestData implements Serializable {
 
 	@Override
 	public String toString() {
-		return "RestData [id=" + id + ", userName=" + userName + ", totalBalance=" + totalBalance
-		          + ", createdAt=" + createdAt + "]";
+		return "RestData [id=" + id + ", userName=" + userName + ", totalBalance=" + totalBalance + ", createdAt="
+				+ createdAt + "]";
 	}
 
 }

@@ -9,7 +9,8 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.kvvssut.controller.RestController;
 import com.kvvssut.dto.RestRequestDTO;
@@ -29,7 +30,7 @@ public class RestServiceImpl implements RestService {
 	@Inject
 	private RestQueueProducer producer;
 
-	private static Logger logger = Logger.getLogger(RestServiceImpl.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(RestServiceImpl.class);
 
 	private RestQueuePayload restQueueDTO;
 
@@ -41,13 +42,11 @@ public class RestServiceImpl implements RestService {
 		restQueueDTO.setAmount(restRequestDTO.getAmount());
 		restQueueDTO.setRetryCounter(0);
 
-		System.out.println(restQueueDTO.getUserName());
-
 		String output = "Success";
 		try {
 			JobExecutor jobExecutor = new JobExecutor();
 			jobExecutor.executor(new RestJobThread(producer, restQueueDTO));
-			logger.info("b4 put : " + System.currentTimeMillis());
+			LOGGER.info("timestamp b4 putting into queue : {}", System.currentTimeMillis());
 		} catch (Exception e) {
 			output = "Failure";
 			e.printStackTrace();
@@ -58,14 +57,14 @@ public class RestServiceImpl implements RestService {
 
 	@Override
 	public void verifyUserDetails(String userName, BigDecimal amount) {
-		logger.info("a4 cal : " + System.currentTimeMillis());
+		LOGGER.info("a4 cal : " + System.currentTimeMillis());
 		restController.updateBalanceByUserName(userName, amount);
 	}
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public BigDecimal getBalance(String userName) {
-		logger.info("a4 cal : " + System.currentTimeMillis());
+		LOGGER.info("timestamp b4 calling db controller : {}", System.currentTimeMillis());
 		return restController.getBalanceByUserName(userName);
 	}
 

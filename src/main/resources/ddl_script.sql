@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS homedb;
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'homepwd' WITH GRANT OPTION;
+
+DROP TABLE IF EXISTS restdata;
+
+DROP TABLE IF EXISTS configuration;
+
+CREATE TABLE restdata(id INT PRIMARY KEY AUTO_INCREMENT, username VARCHAR(59), totalBalance DOUBLE(14,2), lastUpdatedDate TIMESTAMP);
+
+CREATE TABLE configuration(configName VARCHAR(200) PRIMARY KEY, configValue VARCHAR(200), lastUpdatedDate TIMESTAMP);
